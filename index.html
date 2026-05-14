@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>门店教练邀请加入 - 交互原型</title>
+<title>门店口令邀请加入 - 交互原型 v2.0</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -15,6 +15,7 @@
     --success: #6B8F5B;
     --success-bg: rgba(107,143,91,0.08);
     --warning: #C4903D;
+    --warning-bg: rgba(196,144,61,0.08);
     --danger: #B84C4C;
     --danger-bg: rgba(184,76,76,0.08);
     --bg: #F4F3EE;
@@ -52,14 +53,6 @@
     margin-bottom: 24px;
   }
 
-  .phones-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 8px;
-  }
-
   .page-header h1 {
     font-size: 28px;
     font-weight: 700;
@@ -72,12 +65,16 @@
     color: var(--text-secondary);
   }
 
+  .phones-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+
   .phones-container {
-    display: flex;
+    display: inline-flex;
     align-items: flex-start;
     gap: 12px;
     flex-wrap: nowrap;
-    flex-shrink: 0;
   }
 
   .phone-column {
@@ -107,7 +104,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 0;
+    margin-top: 240px;
     flex-direction: column;
     gap: 4px;
     flex-shrink: 0;
@@ -126,7 +123,7 @@
     letter-spacing: 1px;
   }
 
-  /* Phone Frame — iPhone 17 Pro Max 390×844pt */
+  /* Phone Frame */
   .phone {
     width: 390px;
     height: 844px;
@@ -140,7 +137,6 @@
     flex-direction: column;
   }
 
-  /* Status Bar */
   .status-bar {
     height: 54px;
     display: flex;
@@ -151,21 +147,11 @@
     flex-shrink: 0;
   }
 
-  .status-time {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
+  .status-time { font-size: 15px; font-weight: 600; color: var(--text-primary); }
 
-  .status-icons {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
+  .status-icons { display: flex; align-items: center; gap: 5px; }
   .status-icons svg { color: var(--text-primary); }
 
-  /* Notch */
   .notch {
     position: absolute;
     top: 0;
@@ -178,7 +164,6 @@
     z-index: 10;
   }
 
-  /* Screen Content */
   .screen {
     flex: 1;
     overflow-y: auto;
@@ -187,7 +172,6 @@
   }
   .screen::-webkit-scrollbar { display: none; }
 
-  /* Nav Header */
   .nav-header {
     display: flex;
     align-items: center;
@@ -217,7 +201,6 @@
 
   .nav-placeholder { width: 32px; }
 
-  /* Content Sections */
   .screen-body {
     padding: 16px 20px 40px;
   }
@@ -234,7 +217,6 @@
 
   .section-title:first-child { margin-top: 0; }
 
-  /* Cards */
   .card {
     background: var(--surface);
     border-radius: var(--radius-xl);
@@ -243,64 +225,6 @@
     margin-bottom: 12px;
   }
 
-  /* Invite Link Card */
-  .link-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .link-icon-box {
-    width: 40px;
-    height: 40px;
-    background: var(--primary-bg);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .link-icon-box svg { color: var(--primary); }
-
-  .link-text {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .link-text-main {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: 2px;
-  }
-
-  .link-text-sub {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .link-copy-btn {
-    padding: 8px 16px;
-    background: var(--bg-tertiary);
-    border: none;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: all 0.15s;
-    flex-shrink: 0;
-  }
-
-  .link-copy-btn:active {
-    transform: scale(0.96);
-  }
-
-  /* Primary Button */
   .btn-primary {
     width: 100%;
     padding: 16px;
@@ -337,133 +261,6 @@
 
   .btn-secondary:active { transform: scale(0.97); }
 
-  /* Share Buttons */
-  .share-row {
-    display: flex;
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .share-btn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 16px 8px;
-    background: var(--surface);
-    border: 1px solid var(--divider-light);
-    border-radius: var(--radius-xl);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .share-btn:active {
-    transform: scale(0.97);
-    background: var(--bg);
-  }
-
-  .share-btn-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .share-btn-text {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  /* WeChat Green */
-  .wechat-bg { background: #07C160; }
-
-  /* Coach Stats Row */
-  .stats-row {
-    display: flex;
-    gap: 12px;
-  }
-
-  .stat-card {
-    flex: 1;
-    background: var(--surface);
-    border-radius: var(--radius-xl);
-    padding: 16px;
-    box-shadow: var(--shadow-card);
-    text-align: center;
-  }
-
-  .stat-number {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--primary);
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    margin-top: 4px;
-  }
-
-  /* Coach list item */
-  .coach-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--divider-light);
-  }
-
-  .coach-item:last-child { border-bottom: none; }
-
-  .coach-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .coach-info { flex: 1; }
-
-  .coach-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  .coach-desc {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    margin-top: 2px;
-  }
-
-  .coach-status {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  .status-active {
-    color: var(--success);
-    background: var(--success-bg);
-  }
-
-  .status-new {
-    color: var(--primary);
-    background: var(--primary-bg);
-  }
-
-  /* Member row */
   .member-row {
     display: flex;
     align-items: center;
@@ -483,485 +280,6 @@
   }
 
   .edit-btn:active { opacity: 0.6; }
-
-  /* Failure steps list */
-  .steps-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .step-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    position: relative;
-    padding-bottom: 20px;
-  }
-
-  .step-item:last-child { padding-bottom: 0; }
-
-  .step-item::before {
-    content: '';
-    position: absolute;
-    left: 15px;
-    top: 32px;
-    bottom: 0;
-    width: 2px;
-    background: var(--divider-light);
-  }
-
-  .step-item:last-child::before { display: none; }
-
-  .step-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .step-content {
-    padding-top: 4px;
-  }
-
-  .step-content-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 2px;
-  }
-
-  .step-content-desc {
-    font-size: 13px;
-    color: var(--text-tertiary);
-  }
-
-  /* Role option pills in manual add sheet */
-  .role-option {
-    padding: 10px 20px;
-    border: 1.5px solid var(--divider);
-    border-radius: 24px;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s;
-    user-select: none;
-  }
-
-  .role-option:active { transform: scale(0.96); }
-
-  .role-option.active {
-    color: var(--primary);
-    border-color: var(--primary);
-    background: var(--primary-bg);
-  }
-
-  /* ===== Coach Phone Specific ===== */
-  .wechat-header {
-    background: #EDEDED;
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid #D9D9D9;
-  }
-
-  .wechat-header-title {
-    font-size: 17px;
-    font-weight: 600;
-    color: #000;
-    flex: 1;
-    text-align: center;
-  }
-
-  .wechat-link-card {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 12px;
-    margin: 12px 16px;
-    border: 1px solid #E5E5E5;
-  }
-
-  .wechat-link-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 4px;
-  }
-
-  .wechat-link-desc {
-    font-size: 13px;
-    color: #999;
-  }
-
-  /* WeChat Chat Bubbles */
-  .chat-area {
-    padding: 16px;
-    flex: 1;
-    background: #EDEDED;
-  }
-
-  .chat-bubble-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .chat-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-  }
-
-  .chat-bubble {
-    background: #FFFFFF;
-    border-radius: var(--radius-md);
-    padding: 10px 14px;
-    max-width: 200px;
-    font-size: 15px;
-    color: #333;
-    line-height: 1.5;
-    position: relative;
-  }
-
-  .chat-bubble::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    top: 10px;
-    width: 0;
-    height: 0;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-right: 6px solid #FFFFFF;
-  }
-
-  .chat-link-bubble {
-    background: #FFFFFF;
-    border-radius: var(--radius-md);
-    padding: 0;
-    overflow: hidden;
-    border: 1px solid #E5E5E5;
-  }
-
-  .chat-link-bubble .link-preview {
-    padding: 10px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .chat-link-bubble .link-thumb {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-sm);
-    background: var(--primary-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .chat-link-bubble .link-thumb svg { color: var(--primary); }
-
-  .chat-link-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .chat-link-info .t1 {
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-  }
-
-  .chat-link-info .t2 {
-    font-size: 12px;
-    color: #999;
-    margin-top: 2px;
-  }
-
-  /* Overlay / Modal */
-  .modal-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(45,42,38,0.5);
-    z-index: 20;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    animation: fadeIn 0.2s ease;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-
-  .modal-sheet {
-    width: 100%;
-    background: var(--bg);
-    border-radius: 20px 20px 0 0;
-    padding: 12px 20px 32px;
-    animation: slideUp 0.25s ease;
-  }
-
-  .sheet-handle {
-    width: 36px;
-    height: 5px;
-    background: var(--text-tertiary);
-    border-radius: 3px;
-    margin: 0 auto 20px;
-  }
-
-  .modal-icon-row {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-
-  .modal-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--primary-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal-icon svg { color: var(--primary); }
-
-  .modal-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .modal-desc {
-    font-size: 15px;
-    color: var(--text-secondary);
-    text-align: center;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  /* Download Guide Screen */
-  .download-header {
-    background: var(--surface);
-    padding: 20px;
-    text-align: center;
-  }
-
-  .download-logo {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--radius-xl);
-    background: var(--primary-gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-
-  .download-logo svg { color: white; }
-
-  .download-app-name {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
-
-  .download-app-sub {
-    font-size: 13px;
-    color: var(--text-tertiary);
-  }
-
-  .success-card {
-    text-align: center;
-    padding: 24px 20px;
-  }
-
-  .success-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--success-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-  }
-
-  .success-icon svg { color: var(--success); }
-
-  .success-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
-
-  .success-desc {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .shop-info-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px;
-    background: var(--surface);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-card);
-    margin-bottom: 12px;
-  }
-
-  .shop-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-lg);
-    background: var(--primary-gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: white;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .shop-name {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .shop-meta {
-    font-size: 13px;
-    color: var(--text-tertiary);
-    margin-top: 3px;
-  }
-
-  /* Download store badges */
-  .store-badges {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .store-badge {
-    height: 40px;
-    padding: 0 16px;
-    background: #000;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-  }
-
-  .store-badge svg { color: #fff; }
-
-  .store-badge-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-
-  .store-badge-text .t1 { font-size: 10px; color: #ccc; }
-  .store-badge-text .t2 { font-size: 14px; color: #fff; font-weight: 600; }
-
-  /* Step indicator */
-  .step-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 6px;
-  }
-
-  .step-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--bg-tertiary);
-    transition: all 0.3s;
-  }
-
-  .step-dot.active {
-    background: var(--primary);
-    width: 24px;
-    border-radius: 4px;
-  }
-
-  .step-dot.done {
-    background: var(--primary-light);
-  }
-
-  .step-label {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  /* Navigation arrows between steps */
-  .step-nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 12px;
-  }
-
-  .step-nav-btn {
-    padding: 6px 16px;
-    border: 1px solid var(--divider);
-    border-radius: 20px;
-    background: var(--surface);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .step-nav-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-  }
-
-  .step-nav-btn:active { transform: scale(0.96); }
 
   /* Bottom Sheet */
   .bottom-sheet-overlay {
@@ -1008,9 +326,7 @@
     transition: background 0.1s;
   }
 
-  .sheet-option:active {
-    background: var(--bg);
-  }
+  .sheet-option:active { background: var(--bg); }
 
   .sheet-option-icon {
     width: 40px;
@@ -1022,9 +338,7 @@
     flex-shrink: 0;
   }
 
-  .sheet-option-text {
-    flex: 1;
-  }
+  .sheet-option-text { flex: 1; }
 
   .sheet-option-title {
     font-size: 16px;
@@ -1059,11 +373,9 @@
     padding: 4px 0;
   }
 
-  .sheet-cancel-btn:active {
-    color: var(--text-primary);
-  }
+  .sheet-cancel-btn:active { color: var(--text-primary); }
 
-  /* Phone add result toast */
+  /* Toast */
   .toast-overlay {
     position: absolute;
     top: 60px;
@@ -1074,9 +386,7 @@
     animation: toastIn 0.3s ease forwards;
   }
 
-  .toast-overlay.hide {
-    animation: toastOut 0.3s ease forwards;
-  }
+  .toast-overlay.hide { animation: toastOut 0.3s ease forwards; }
 
   .toast-card {
     background: var(--text-primary);
@@ -1092,634 +402,675 @@
     box-shadow: 0 4px 16px rgba(45,42,38,0.2);
   }
 
-  @keyframes toastIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(-10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  @keyframes toastOut { from { opacity: 1; transform: translateX(-50%) translateY(0); } to { opacity: 0; transform: translateX(-50%) translateY(-10px); } }
+
+  /* Code Card */
+  .code-display {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    text-align: center;
+    margin: 20px 0;
+    border: 1.5px dashed var(--divider);
   }
 
-  @keyframes toastOut {
-    from { opacity: 1; transform: translateX(-50%) translateY(0); }
-    to { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  .code-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 2px;
+    font-family: 'SF Mono', 'Menlo', monospace;
+    margin: 12px 0;
   }
 
-  /* Shop entry point */
-  .entry-item {
+  .code-label {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .code-expire {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-top: 16px;
+  }
+
+  .code-action {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 16px 20px;
-    background: var(--surface);
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary);
     cursor: pointer;
-    transition: background 0.1s;
-    border-bottom: 1px solid var(--divider-light);
+    padding: 8px 0;
   }
 
-  .entry-item:last-child { border-bottom: none; }
+  .code-action:active { opacity: 0.6; }
 
-  .entry-item:active { background: var(--bg); }
+  /* Step indicator */
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
 
-  .entry-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-md);
+  .step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .step-dot.active {
+    background: var(--primary);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .step-dot.done { background: var(--primary-light); }
+
+  .step-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  /* 金刚位 Grid */
+  .jingang-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 0;
+    padding: 16px 0;
+  }
+
+  .jingang-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  .jingang-item:active { transform: scale(0.95); }
+
+  .jingang-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .entry-icon svg { color: white; }
-
-  .entry-text {
-    flex: 1;
-    font-size: 16px;
+  .jingang-label {
+    font-size: 12px;
     font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  /* Modal overlay for alerts */
+  .alert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(45,42,38,0.5);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .alert-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 28px 24px 20px;
+    width: 300px;
+    text-align: center;
+    animation: slideUp 0.25s ease;
+  }
+
+  .alert-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .alert-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .alert-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .alert-btns {
+    display: flex;
+    gap: 10px;
+  }
+
+  .alert-btns .btn-primary,
+  .alert-btns .btn-secondary {
+    flex: 1;
+    margin-top: 0;
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  /* Info row */
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider-light);
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .info-value {
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text-primary);
   }
 
-  .entry-chevron {
-    color: var(--text-quaternary);
-  }
+  /* Coach screen steps */
+  .screen-step { display: none; }
+  .screen-step.active { display: block; }
 
-  /* Exception phone controls */
-  .phone-with-controls {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    flex-shrink: 0;
-  }
-
-  .exception-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 40px;
-    min-width: 140px;
-  }
-
-  .exception-ctrl-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
+  /* Input field */
+  .input-field {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--bg-tertiary);
+    border: 1.5px solid var(--divider);
     border-radius: var(--radius-lg);
-    border: 1.5px solid var(--divider-light);
-    background: var(--surface);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s;
-    user-select: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: 2px;
+    font-family: 'SF Mono', 'Menlo', monospace;
+    outline: none;
+    transition: border-color 0.2s;
   }
 
-  .exception-ctrl-item:active { transform: scale(0.96); }
-
-  .exception-ctrl-item.active {
-    color: var(--primary);
+  .input-field:focus {
     border-color: var(--primary);
-    background: var(--primary-bg);
+    border-width: 1.5px;
   }
 
-  .exception-ctrl-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--divider);
-    flex-shrink: 0;
-    transition: background 0.15s;
+  .input-field::placeholder {
+    font-size: 14px;
+    letter-spacing: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-tertiary);
+    font-weight: 400;
   }
-
-  .exception-ctrl-item.active .exception-ctrl-dot {
-    background: var(--primary);
-  }
-
 </style>
 </head>
 <body>
 
 <div class="page-header">
-  <h1>门店成员邀请加入</h1>
-  <p>链接邀请流程交互原型 — 左侧店长端 &middot; 中间教练端 &middot; 右侧加入失败异常分支</p>
+  <h1>门店口令邀请加入</h1>
+  <p>口令方案交互原型 — 左侧店长端 &middot; 右侧教练端 &middot; 点击步骤圆点切换演示</p>
 </div>
 
 <div class="phones-wrapper">
 <div class="phones-container">
 
-  <!-- ========== LEFT PHONE: 店长端 ========== -->
-  <div class="phone-column">
-    <div class="phone-label">Store Owner</div>
-    <div class="phone-role">店长端</div>
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="status-bar">
-        <span class="status-time">9:41</span>
-        <div class="status-icons">
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="9" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="currentColor" opacity="0.3"/></svg>
-          <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M7.5 3.6c1.8 0 3.4.7 4.6 1.9l1.4-1.4C11.7 2.3 9.7 1.5 7.5 1.5S3.3 2.3 1.5 4.1l1.4 1.4C4.1 4.3 5.7 3.6 7.5 3.6z" fill="currentColor"/><path d="M7.5 6.9c1.1 0 2.1.4 2.9 1.2l1.4-1.4C10.5 5.4 9.1 4.8 7.5 4.8S4.5 5.4 3.2 6.7l1.4 1.4c.8-.8 1.8-1.2 2.9-1.2z" fill="currentColor"/><circle cx="7.5" cy="10.8" r="1.5" fill="currentColor"/></svg>
-          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2" stroke="currentColor" stroke-opacity="0.35"/><rect x="2" y="2" width="15" height="8" rx="1" fill="currentColor"/><path d="M23 4.5v3a1.5 1.5 0 000-3z" fill="currentColor" opacity="0.4"/></svg>
-        </div>
-      </div>
-
-      <div class="screen" id="owner-screen">
-        <!-- Main Page: Coach List -->
-        <div class="screen-step" id="owner-step-1" style="display:block">
-          <div class="nav-header">
-            <div class="nav-back">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </div>
-            <span class="nav-title">店铺成员管理</span>
-            <div class="nav-placeholder"></div>
-          </div>
-          <div class="screen-body">
-            <!-- Stats Card with Add Button -->
-            <div class="card" style="position: relative;">
-              <button onclick="showAddSheet()" style="position:absolute; top:16px; right:16px; padding:8px 14px; background:var(--primary); color:white; border:none; border-radius:20px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                添加成员
-              </button>
-              <div style="display:flex; gap: 24px;">
-                <div>
-                  <div style="font-size:28px; font-weight:700; color:var(--text-primary);">2,000</div>
-                  <div style="font-size:13px; color:var(--text-tertiary); margin-top:4px;">保证金 (元)</div>
-                </div>
-                <div style="width:1px; background:var(--divider-light);"></div>
-                <div>
-                  <div style="font-size:28px; font-weight:700; color:var(--primary);">18</div>
-                  <div style="font-size:13px; color:var(--text-tertiary); margin-top:4px;">剩余名额</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Member List -->
-            <div class="section-title">成员列表 (3)</div>
-            <div class="card" style="padding: 0;">
-              <!-- Table Header -->
-              <div style="display:flex; align-items:center; padding:10px 16px; border-bottom:1px solid var(--divider-light); background:var(--bg-secondary);">
-                <div style="flex:1.1; font-size:12px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">姓名</div>
-                <div style="flex:1.2; font-size:12px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">手机号</div>
-                <div style="width:60px; font-size:12px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">角色</div>
-                <div style="width:48px;"></div>
-              </div>
-              <!-- Member 1 -->
-              <div class="member-row">
-                <div style="flex:1.1; font-size:15px; font-weight:500; color:var(--text-primary);">王强</div>
-                <div style="flex:1.2; font-size:14px; color:var(--text-secondary);">138****6721</div>
-                <div style="width:60px; font-size:13px; color:var(--text-secondary);">员工</div>
-                <div style="width:48px; text-align:right;">
-                  <span class="edit-btn">编辑</span>
-                </div>
-              </div>
-              <!-- Member 2 -->
-              <div class="member-row">
-                <div style="flex:1.1; font-size:15px; font-weight:500; color:var(--text-primary);">李芳</div>
-                <div style="flex:1.2; font-size:14px; color:var(--text-secondary);">139****3358</div>
-                <div style="width:60px; font-size:13px; color:var(--primary); font-weight:500;">管理员</div>
-                <div style="width:48px; text-align:right;">
-                  <span class="edit-btn">编辑</span>
-                </div>
-              </div>
-              <!-- Member 3 -->
-              <div class="member-row" style="border-bottom:none;">
-                <div style="flex:1.1; font-size:15px; font-weight:500; color:var(--text-primary);">赵敏</div>
-                <div style="flex:1.2; font-size:14px; color:var(--text-secondary);">136****9102</div>
-                <div style="width:60px; font-size:13px; color:var(--text-secondary);">员工</div>
-                <div style="width:48px; text-align:right;">
-                  <span class="edit-btn">编辑</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Sheet 1: Add Method -->
-        <div class="bottom-sheet-overlay" id="addSheet" style="display:none;" onclick="hideAddSheet(event)">
-          <div class="bottom-sheet" onclick="event.stopPropagation()">
-            <div class="sheet-handle"></div>
-            <div class="sheet-title">选择添加方式</div>
-            <div class="sheet-option" onclick="showManualAddSheet()">
-              <div class="sheet-option-icon" style="background: var(--primary-bg);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              </div>
-              <div class="sheet-option-text">
-                <div class="sheet-option-title">手动添加</div>
-                <div class="sheet-option-desc">输入手机号，直接添加到店铺</div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            </div>
-            <div class="sheet-divider"></div>
-            <div class="sheet-option" onclick="hideAllSheets(); showToast('已调起微信分享')">
-              <div class="sheet-option-icon" style="background: #07C160;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05a6.093 6.093 0 01-.247-1.732c0-3.614 3.232-6.564 7.219-6.564.258 0 .51.013.761.036C16.407 4.658 12.898 2.188 8.691 2.188zm-2.5 4.262a1.125 1.125 0 110 2.25 1.125 1.125 0 010-2.25zm5.048 0a1.125 1.125 0 110 2.25 1.125 1.125 0 010-2.25zM15.881 9.63c-3.544 0-6.42 2.554-6.42 5.7 0 3.147 2.876 5.7 6.42 5.7.724 0 1.424-.1 2.08-.287a.678.678 0 01.561.077l1.492.874a.255.255 0 00.131.042.229.229 0 00.228-.23c0-.056-.023-.11-.038-.167l-.306-1.161a.46.46 0 01.166-.52C21.618 18.7 22.5 17.096 22.5 15.33c0-3.146-2.876-5.7-6.619-5.7zm-2.586 3.72a.88.88 0 110 1.76.88.88 0 010-1.76zm5.172 0a.88.88 0 110 1.76.88.88 0 010-1.76z"/></svg>
-              </div>
-              <div class="sheet-option-text">
-                <div class="sheet-option-title">分享到微信</div>
-                <div class="sheet-option-desc">直接调起微信，发送给好友或群聊</div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            </div>
-            <div class="sheet-divider"></div>
-            <div class="sheet-option" onclick="hideAllSheets(); showToast('链接已复制到剪贴板')">
-              <div class="sheet-option-icon" style="background: var(--bg-tertiary);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-              </div>
-              <div class="sheet-option-text">
-                <div class="sheet-option-title">复制链接</div>
-                <div class="sheet-option-desc">复制邀请链接，自行粘贴发送</div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            </div>
-            <div class="sheet-cancel">
-              <span class="sheet-cancel-btn" onclick="hideAllSheets()">取消</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Sheet 3: Manual Add -->
-        <div class="bottom-sheet-overlay" id="manualAddSheet" style="display:none;" onclick="hideManualAddSheet(event)">
-          <div class="bottom-sheet" onclick="event.stopPropagation()" style="padding-bottom: 32px;">
-            <div class="sheet-handle"></div>
-            <div class="sheet-title">手动添加成员</div>
-            <div style="padding: 0 24px 20px;">
-              <!-- Phone input -->
-              <div style="margin-bottom: 20px;">
-                <div style="font-size:13px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">手机号</div>
-                <div style="position:relative;">
-                  <div style="display:flex; align-items:center; background:var(--bg-tertiary); border:1px solid var(--divider); border-radius:var(--radius-lg); padding:14px 16px; gap:8px;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                    <input type="tel" placeholder="请输入手机号" style="flex:1; background:transparent; border:none; outline:none; font-size:16px; color:var(--text-primary);" id="phoneInput">
-                  </div>
-                </div>
-              </div>
-              <!-- Role select -->
-              <div style="margin-bottom: 28px;">
-                <div style="font-size:13px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">角色</div>
-                <div style="display:flex; gap:10px;">
-                  <div class="role-option active" id="roleNormal" onclick="selectRole('normal')">
-                    <span>普通员工</span>
-                  </div>
-                  <div class="role-option" id="roleAdmin" onclick="selectRole('admin')">
-                    <span>管理员</span>
-                  </div>
-                </div>
-              </div>
-              <!-- Confirm -->
-              <button class="btn-primary" onclick="confirmManualAdd()">确认添加</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Toast -->
-        <div class="toast-overlay" id="ownerToast" style="display:none;">
-          <div class="toast-card">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span id="toastText"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom Tab Bar -->
-      <div style="height: 1px; background: var(--divider-light);"></div>
-      <div style="display:flex; align-items:center; justify-content:space-around; padding: 8px 0 20px; background: var(--surface);">
-        <div style="text-align:center; color: var(--text-tertiary); cursor:pointer;" onclick="ownerGoStep(1)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-          <div style="font-size:11px; margin-top:2px;">首页</div>
-        </div>
-        <div style="text-align:center; color: var(--text-tertiary); cursor:pointer;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          <div style="font-size:11px; margin-top:2px;">会员</div>
-        </div>
-        <div style="text-align:center; color: var(--primary); cursor:pointer;" onclick="ownerGoStep(1)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          <div style="font-size:11px; margin-top:2px; font-weight:600;">成员</div>
-        </div>
-        <div style="text-align:center; color: var(--text-tertiary); cursor:pointer;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <div style="font-size:11px; margin-top:2px;">设置</div>
-        </div>
+<!-- ========== LEFT PHONE: 店长端 ========== -->
+<div class="phone-column">
+  <div class="phone-label">Store Owner</div>
+  <div class="phone-role">店长端</div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="9" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="currentColor" opacity="0.3"/></svg>
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M7.5 3.6c1.8 0 3.4.7 4.6 1.9l1.4-1.4C11.7 2.3 9.7 1.5 7.5 1.5S3.3 2.3 1.5 4.1l1.4 1.4C4.1 4.3 5.7 3.6 7.5 3.6z" fill="currentColor"/><path d="M7.5 6.9c1.1 0 2.1.4 2.9 1.2l1.4-1.4C10.5 5.4 9.1 4.8 7.5 4.8S4.5 5.4 3.2 6.7l1.4 1.4c.8-.8 1.8-1.2 2.9-1.2z" fill="currentColor"/><circle cx="7.5" cy="10.8" r="1.5" fill="currentColor"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2" stroke="currentColor" stroke-opacity="0.35"/><rect x="2" y="2" width="15" height="8" rx="1" fill="currentColor"/><path d="M23 4.5v3a1.5 1.5 0 000-3z" fill="currentColor" opacity="0.4"/></svg>
       </div>
     </div>
 
-    <div class="step-indicator" id="owner-steps-indicator">
-      <div class="step-dot active" data-step="1" onclick="ownerGoStep(1)"></div>
-      <div class="step-dot" data-step="2" onclick="showAddSheet()"></div>
-    </div>
-    <div class="step-label" id="owner-step-label">教练列表 &middot; 点击「添加成员」</div>
-  </div>
-
-  <!-- ========== FLOW ARROW ========== -->
-  <div class="flow-arrow">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" opacity="0.3"/><path d="M8 12h8M13 9l3 3-3 3"/></svg>
-    <span class="flow-arrow-text">微信分享</span>
-  </div>
-
-  <!-- ========== RIGHT PHONE: 教练端 ========== -->
-  <div class="phone-column">
-    <div class="phone-label">Coach</div>
-    <div class="phone-role">教练端</div>
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="status-bar">
-        <span class="status-time">9:42</span>
-        <div class="status-icons">
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="9" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="currentColor" opacity="0.3"/></svg>
-          <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M7.5 3.6c1.8 0 3.4.7 4.6 1.9l1.4-1.4C11.7 2.3 9.7 1.5 7.5 1.5S3.3 2.3 1.5 4.1l1.4 1.4C4.1 4.3 5.7 3.6 7.5 3.6z" fill="currentColor"/><path d="M7.5 6.9c1.1 0 2.1.4 2.9 1.2l1.4-1.4C10.5 5.4 9.1 4.8 7.5 4.8S4.5 5.4 3.2 6.7l1.4 1.4c.8-.8 1.8-1.2 2.9-1.2z" fill="currentColor"/><circle cx="7.5" cy="10.8" r="1.5" fill="currentColor"/></svg>
-          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2" stroke="currentColor" stroke-opacity="0.35"/><rect x="2" y="2" width="15" height="8" rx="1" fill="currentColor"/><path d="M23 4.5v3a1.5 1.5 0 000-3z" fill="currentColor" opacity="0.4"/></svg>
-        </div>
-      </div>
-
-      <div class="screen" id="coach-screen">
-        <!-- Step 1: WeChat Chat -->
-        <div class="screen-step" id="coach-step-1" style="display:block">
-          <div class="wechat-header">
-            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9l8 8" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
-            <span class="wechat-header-title">张店长</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    <div class="screen" id="owner-screen">
+      <!-- Main Page: Member List -->
+      <div class="screen-step active" id="owner-step-1">
+        <div class="nav-header">
+          <div class="nav-back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
           </div>
-          <div class="chat-area">
-            <div style="text-align:center; font-size:12px; color:#B0B0B0; margin-bottom:16px;">下午 3:28</div>
-
-            <div class="chat-bubble-row">
-              <div class="chat-avatar" style="background: #C15F3C;">张</div>
-              <div class="chat-bubble">
-                Hi，欢迎加入 FitLife 健身工作室！请点击链接完成加入，开启你的课程分销之旅 👉
-              </div>
-            </div>
-
-            <div class="chat-bubble-row">
-              <div class="chat-avatar" style="background: #C15F3C;">张</div>
+          <span class="nav-title">店铺成员管理</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body">
+          <!-- Stats Card -->
+          <div class="card" style="position:relative;">
+            <button onclick="showAddSheet()" style="position:absolute; top:16px; right:16px; padding:8px 14px; background:var(--primary); color:white; border:none; border-radius:20px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              添加成员
+            </button>
+            <div style="display:flex; gap:24px;">
               <div>
-                <div class="chat-bubble" style="margin-bottom: 4px; font-size: 13px; color: #999; padding: 6px 10px;">
-                  [链接]
-                </div>
-                <div class="chat-link-bubble" style="cursor:pointer; max-width: 240px;" onclick="coachGoStep(2)">
-                  <div class="link-preview">
-                    <div class="link-thumb">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-                    </div>
-                    <div class="chat-link-info">
-                      <div class="t1">FitLife 健身工作室</div>
-                      <div class="t2">邀请你加入店铺</div>
-                    </div>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C8C4BC" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-                  </div>
-                </div>
+                <div style="font-size:28px; font-weight:700; color:var(--text-primary);">2,000</div>
+                <div style="font-size:13px; color:var(--text-tertiary); margin-top:4px;">保证金 (元)</div>
               </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 20px;">
-              <p style="font-size: 13px; color: #B0B0B0;">点击上方链接，加入店铺</p>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B0B0B0" stroke-width="1.5" stroke-linecap="round" style="margin-top: 8px; animation: bounce 1.5s ease infinite;">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-              </svg>
+              <div style="width:1px; background:var(--divider-light);"></div>
+              <div>
+                <div style="font-size:28px; font-weight:700; color:var(--primary);">18</div>
+                <div style="font-size:13px; color:var(--text-tertiary); margin-top:4px;">剩余名额</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Step 2: Browser / H5 打开邀请页 -->
-        <div class="screen-step" id="coach-step-2" style="display:none">
-          <div class="nav-header" style="background: #EDEDED;">
-            <div class="nav-back">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <!-- Member List -->
+          <div class="section-title">成员列表 (3)</div>
+          <div class="card" style="padding:0;">
+            <div style="display:flex; align-items:center; padding:10px 16px; border-bottom:1px solid var(--divider-light); background:var(--bg-secondary);">
+              <div style="flex:1.1; font-size:12px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">姓名</div>
+              <div style="flex:1.2; font-size:12px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">手机号</div>
+              <div style="width:60px; font-size:12px; font-weight:600; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">角色</div>
+              <div style="width:48px;"></div>
             </div>
-            <span class="nav-title" style="font-size:14px; color: var(--text-secondary);">litta.app/invite</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-          </div>
-          <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height: 400px; padding: 40px 24px;">
-            <!-- Shop icon -->
-            <div style="width:72px; height:72px; border-radius:20px; background:var(--primary-gradient); display:flex; align-items:center; justify-content:center; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(193,95,60,0.2);">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
+            <div class="member-row">
+              <div style="flex:1.1; font-size:15px; font-weight:500; color:var(--text-primary);">王强</div>
+              <div style="flex:1.2; font-size:14px; color:var(--text-secondary);">138****6721</div>
+              <div style="width:60px; font-size:13px; color:var(--text-secondary);">员工</div>
+              <div style="width:48px; text-align:right;"><span class="edit-btn">编辑</span></div>
             </div>
-
-            <!-- Shop name -->
-            <div style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">FitLife 健身工作室</div>
-
-            <!-- Invite info card -->
-            <div style="width:100%; background:var(--bg-secondary); border-radius:var(--radius-lg); padding:16px 20px; margin-bottom: 32px;">
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span style="font-size:14px; color:var(--text-secondary);">邀请人：<strong style="color:var(--text-primary); font-weight:600;">张店长</strong></span>
-              </div>
-              <div style="display:flex; align-items:center; gap:10px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-                <span style="font-size:14px; color:var(--text-secondary);">加入店铺：<strong style="color:var(--text-primary); font-weight:600;">FitLife 健身工作室</strong></span>
-              </div>
+            <div class="member-row">
+              <div style="flex:1.1; font-size:15px; font-weight:500; color:var(--text-primary);">李芳</div>
+              <div style="flex:1.2; font-size:14px; color:var(--text-secondary);">139****3358</div>
+              <div style="width:60px; font-size:13px; color:var(--primary); font-weight:500;">管理员</div>
+              <div style="width:48px; text-align:right;"><span class="edit-btn">编辑</span></div>
             </div>
-
-            <!-- CTA -->
-            <div style="width:100%;">
-              <button class="btn-primary" onclick="showJoinConfirm()">加入店铺</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Join Confirm Modal -->
-        <div class="modal-overlay" id="joinConfirmModal" style="display:none;" onclick="hideJoinConfirm(event)">
-          <div class="modal-sheet" onclick="event.stopPropagation()">
-            <div class="sheet-handle"></div>
-            <div class="modal-icon-row">
-              <div class="modal-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-              </div>
-            </div>
-            <div class="modal-title">确认加入 FitLife 健身工作室</div>
-            <button class="btn-primary" onclick="hideJoinConfirmDirect(); coachGoStep(3);">确认加入</button>
-            <button class="btn-secondary" onclick="hideJoinConfirmDirect()">我再想想</button>
-          </div>
-        </div>
-
-        <!-- Step 3: 绑定成功 + 下载引导 -->
-        <div class="screen-step" id="coach-step-3" style="display:none">
-          <div class="nav-header" style="background: #EDEDED;">
-            <div class="nav-back">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </div>
-            <span class="nav-title" style="font-size:14px; color: var(--text-secondary);">litta.app/invite</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-          </div>
-          <div class="screen-body">
-            <div class="card success-card" style="margin-top: 20px;">
-              <div class="success-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="success-title">加入成功!</div>
-              <div class="success-desc">你已成功加入 <strong>FitLife 健身工作室</strong></div>
-            </div>
-
-            <div class="card" style="text-align:center; padding: 28px 24px;">
-              <div class="download-logo">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              </div>
-              <div style="font-size:17px; font-weight:600; color:var(--text-primary); margin: 12px 0 4px;">下载 Litta App</div>
-              <div style="font-size:14px; color:var(--text-secondary); margin-bottom: 24px;">登录后即可开始使用</div>
-              <button class="btn-primary" id="downloadBtn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                下载 App
-              </button>
-              <div style="margin-top: 16px; font-size: 14px; color: var(--text-tertiary);">
-                已经安装了 App？<span style="color: var(--primary); font-weight: 500; cursor: pointer;">点击打开</span>
-              </div>
-            </div>
+            <div class="member-row" style="border-bottom:none;">
+              <div style="flex:1.1; font-size:15px; font-weight:500; color:var(--text-primary);">赵敏</div>
+              <div style="flex:1.2; font-size:14px; color:var(--text-secondary);">136****9102</div>
+              <div style="width:60px; font-size:13px; color:var(--text-secondary);">员工</div>
+              <div style="width:48px; text-align:right;"><span class="edit-btn">编辑</span></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom Tab Bar -->
-      <div style="height: 1px; background: var(--divider-light);"></div>
-      <div style="display:flex; align-items:center; justify-content:center; padding: 8px 0 20px; background: var(--surface);">
-        <div style="text-align:center; color: var(--text-quaternary);">
-          <svg width="16" height="4" viewBox="0 0 16 4"><rect width="16" height="4" rx="2" fill="currentColor"/></svg>
+      <!-- Bottom Sheet: Add Method -->
+      <div class="bottom-sheet-overlay" id="addSheet" style="display:none;" onclick="hideAddSheet(event)">
+        <div class="bottom-sheet" onclick="event.stopPropagation()">
+          <div class="sheet-handle"></div>
+          <div class="sheet-title">选择添加方式</div>
+          <div class="sheet-option" onclick="hideAllSheets(); showToast('跳转手动添加页面')">
+            <div class="sheet-option-icon" style="background:var(--primary-bg);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="sheet-option-text">
+              <div class="sheet-option-title">手动添加</div>
+              <div class="sheet-option-desc">输入手机号，直接添加到店铺</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+          <div class="sheet-divider"></div>
+          <div class="sheet-option" onclick="showCodeSheet()">
+            <div class="sheet-option-icon" style="background:var(--primary-bg);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+            <div class="sheet-option-text">
+              <div class="sheet-option-title">邀请加入</div>
+              <div class="sheet-option-desc">生成店铺口令，成员在 APP 内输入口令加入</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+          <div class="sheet-cancel">
+            <span class="sheet-cancel-btn" onclick="hideAllSheets()">取消</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Sheet: Code Card -->
+      <div class="bottom-sheet-overlay" id="codeSheet" style="display:none;" onclick="hideCodeSheet(event)">
+        <div class="bottom-sheet" onclick="event.stopPropagation()" style="padding-bottom:36px;">
+          <div class="sheet-handle"></div>
+          <div class="sheet-title">邀请口令</div>
+          <div style="padding:0 24px;">
+            <div class="code-display">
+              <div class="code-label">宝龙广场店邀请口令</div>
+              <div class="code-value">8X3M</div>
+              <div class="code-expire">有效期至：2026-05-21</div>
+            </div>
+            <button class="btn-primary" onclick="hideAllSheets(); showToast('口令已复制')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              一键复制口令
+            </button>
+            <div class="code-action" onclick="showToast('口令已重新生成')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+              重新生成口令
+            </div>
+          </div>
+          <div class="sheet-cancel">
+            <span class="sheet-cancel-btn" onclick="hideAddSheetDirect()">返回</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div class="toast-overlay" id="ownerToast" style="display:none;">
+        <div class="toast-card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="toastText"></span>
         </div>
       </div>
     </div>
 
-    <div class="step-indicator" id="coach-steps-indicator">
-      <div class="step-dot active" data-step="1" onclick="coachGoStep(1)"></div>
-      <div class="step-dot" data-step="2" onclick="coachGoStep(2)"></div>
-      <div class="step-dot" data-step="3" onclick="coachGoStep(3)"></div>
+    <!-- Bottom Tab Bar -->
+    <div style="height:1px; background:var(--divider-light);"></div>
+    <div style="display:flex; align-items:center; justify-content:space-around; padding:8px 0 20px; background:var(--surface);">
+      <div style="text-align:center; color:var(--text-tertiary); cursor:pointer;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        <div style="font-size:11px; margin-top:2px;">首页</div>
+      </div>
+      <div style="text-align:center; color:var(--text-tertiary); cursor:pointer;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <div style="font-size:11px; margin-top:2px;">会员</div>
+      </div>
+      <div style="text-align:center; color:var(--primary); cursor:pointer;" onclick="ownerGoStep(1)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <div style="font-size:11px; margin-top:2px; font-weight:600;">成员</div>
+      </div>
+      <div style="text-align:center; color:var(--text-tertiary); cursor:pointer;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <div style="font-size:11px; margin-top:2px;">设置</div>
+      </div>
     </div>
-    <div class="step-label" id="coach-step-label">微信收到邀请链接</div>
   </div>
 
-  <!-- ========== FAILURE ARROW ========== -->
-  <div class="flow-arrow" style="gap: 4px;">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" opacity="0.6"><circle cx="12" cy="12" r="10" opacity="0.3"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-    <span class="flow-arrow-text" style="color: var(--danger); opacity: 0.6;">异常分支</span>
+  <div class="step-indicator" id="owner-indicator">
+    <div class="step-dot active" data-step="1" onclick="ownerGoStep(1)"></div>
+    <div class="step-dot" data-step="2" onclick="showAddSheet()"></div>
+    <div class="step-dot" data-step="3" onclick="showCodeSheetFromDot()"></div>
   </div>
+  <div class="step-label" id="owner-label">成员列表 &middot; 点击「添加成员」</div>
+</div>
 
-  <!-- ========== THIRD PHONE: Failure Case ========== -->
-  <div class="phone-with-controls">
-  <div class="phone-column">
-    <div class="phone-label">Exception</div>
-    <div class="phone-role">加入失败</div>
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="status-bar">
-        <span class="status-time">9:43</span>
-        <div class="status-icons">
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="9" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="currentColor" opacity="0.3"/></svg>
-          <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M7.5 3.6c1.8 0 3.4.7 4.6 1.9l1.4-1.4C11.7 2.3 9.7 1.5 7.5 1.5S3.3 2.3 1.5 4.1l1.4 1.4C4.1 4.3 5.7 3.6 7.5 3.6z" fill="currentColor"/><path d="M7.5 6.9c1.1 0 2.1.4 2.9 1.2l1.4-1.4C10.5 5.4 9.1 4.8 7.5 4.8S4.5 5.4 3.2 6.7l1.4 1.4c.8-.8 1.8-1.2 2.9-1.2z" fill="currentColor"/><circle cx="7.5" cy="10.8" r="1.5" fill="currentColor"/></svg>
-          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2" stroke="currentColor" stroke-opacity="0.35"/><rect x="2" y="2" width="15" height="8" rx="1" fill="currentColor"/><path d="M23 4.5v3a1.5 1.5 0 000-3z" fill="currentColor" opacity="0.4"/></svg>
-        </div>
+<!-- ========== FLOW ARROW ========== -->
+<div class="flow-arrow">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" opacity="0.3"/><path d="M8 12h8M13 9l3 3-3 3"/></svg>
+  <span class="flow-arrow-text">复制口令</span>
+</div>
+
+<!-- ========== RIGHT PHONE: 教练端 ========== -->
+<div class="phone-column">
+  <div class="phone-label">Coach</div>
+  <div class="phone-role">教练端</div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="status-bar">
+      <span class="status-time">9:42</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="9" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="currentColor" opacity="0.3"/></svg>
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M7.5 3.6c1.8 0 3.4.7 4.6 1.9l1.4-1.4C11.7 2.3 9.7 1.5 7.5 1.5S3.3 2.3 1.5 4.1l1.4 1.4C4.1 4.3 5.7 3.6 7.5 3.6z" fill="currentColor"/><path d="M7.5 6.9c1.1 0 2.1.4 2.9 1.2l1.4-1.4C10.5 5.4 9.1 4.8 7.5 4.8S4.5 5.4 3.2 6.7l1.4 1.4c.8-.8 1.8-1.2 2.9-1.2z" fill="currentColor"/><circle cx="7.5" cy="10.8" r="1.5" fill="currentColor"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2" stroke="currentColor" stroke-opacity="0.35"/><rect x="2" y="2" width="15" height="8" rx="1" fill="currentColor"/><path d="M23 4.5v3a1.5 1.5 0 000-3z" fill="currentColor" opacity="0.4"/></svg>
       </div>
+    </div>
 
-      <div class="screen" id="exception-screen">
-        <!-- Variant A: 已有店铺错误 -->
-        <div class="screen-step" id="exception-step-a" style="display:block">
-          <div class="nav-header" style="background: #EDEDED;">
-            <div class="nav-back">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </div>
-            <span class="nav-title" style="font-size:14px; color: var(--text-secondary);">litta.app/invite</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    <div class="screen" id="coach-screen">
+      <!-- Step 1: Homepage with 金刚位 -->
+      <div class="screen-step active" id="coach-step-1">
+        <div class="nav-header">
+          <div class="nav-placeholder"></div>
+          <span class="nav-title">LITTA 商家端</span>
+          <div style="width:32px; display:flex; justify-content:flex-end;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
-          <div class="screen-body">
-            <!-- Error icon + title -->
-            <div style="text-align:center; margin-top: 20px; margin-bottom: 20px;">
-              <div style="width:64px; height:64px; border-radius:50%; background:var(--danger-bg); display:flex; align-items:center; justify-content:center; margin: 0 auto 14px;">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div class="screen-body">
+          <!-- Greeting -->
+          <div style="margin-bottom:16px;">
+            <div style="font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:4px;">你好，教练</div>
+            <div style="font-size:14px; color:var(--text-secondary);">欢迎使用 LITTA 商家端</div>
+          </div>
+
+          <!-- 金刚位 Grid -->
+          <div class="card" style="padding:16px 8px;">
+            <div class="jingang-grid">
+              <div class="jingang-item" onclick="coachGoStep(2)">
+                <div class="jingang-icon" style="background:var(--primary-gradient);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <span class="jingang-label" style="color:var(--primary); font-weight:600;">加入店铺</span>
               </div>
-              <div style="font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom: 6px;">加入失败</div>
-              <div style="font-size:14px; color:var(--text-secondary); line-height:1.6;">你已拥有自己的店铺，<br/>需要先退出当前店铺才能加入新店铺</div>
-            </div>
-
-            <!-- Steps card -->
-            <div class="card">
-              <div style="font-size:16px; font-weight:600; color:var(--text-primary); margin-bottom: 18px;">如何退出当前店铺</div>
-              <div class="steps-list">
-                <div class="step-item">
-                  <div class="step-num">1</div>
-                  <div class="step-content">
-                    <div class="step-content-title">打开 LITTA 商家端</div>
-                  </div>
+              <div class="jingang-item">
+                <div class="jingang-icon" style="background:var(--success-bg);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 </div>
-                <div class="step-item">
-                  <div class="step-num">2</div>
-                  <div class="step-content">
-                    <div class="step-content-title">进入店铺经营 tab</div>
-                  </div>
+                <span class="jingang-label">训练计划</span>
+              </div>
+              <div class="jingang-item">
+                <div class="jingang-icon" style="background:rgba(139,125,158,0.1);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B7D9E" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
                 </div>
-                <div class="step-item">
-                  <div class="step-num">3</div>
-                  <div class="step-content">
-                    <div class="step-content-title">找到「店铺管理」</div>
-                  </div>
+                <span class="jingang-label">会员管理</span>
+              </div>
+              <div class="jingang-item">
+                <div class="jingang-icon" style="background:rgba(196,144,61,0.1);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
                 </div>
-                <div class="step-item">
-                  <div class="step-num">4</div>
-                  <div class="step-content">
-                    <div class="step-content-title">点击退出当前店铺</div>
-                  </div>
-                </div>
+                <span class="jingang-label">收入统计</span>
               </div>
             </div>
-
-            <!-- Action buttons -->
-            <div style="margin-top: 16px;">
-              <button class="btn-primary" style="background: var(--text-primary);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                打开商家端
-              </button>
-              <button class="btn-secondary" style="margin-top: 10px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                下载商家端
-              </button>
-            </div>
           </div>
-        </div>
 
-        <!-- Variant B: 通用错误 -->
-        <div class="screen-step" id="exception-step-b" style="display:none">
-          <div class="nav-header" style="background: #EDEDED;">
-            <div class="nav-back">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </div>
-            <span class="nav-title" style="font-size:14px; color: var(--text-secondary);">litta.app/invite</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-          </div>
-          <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height: 400px; padding: 40px 24px;">
-            <div style="width:64px; height:64px; border-radius:50%; background:var(--danger-bg); display:flex; align-items:center; justify-content:center; margin-bottom: 20px;">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            </div>
-            <div style="font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom: 10px;">加入失败</div>
-            <div style="font-size:14px; color:var(--text-secondary); line-height:1.6; text-align:center; margin-bottom: 36px;">企业成员额度已满，<br/>请联系店铺管理员</div>
-            <div style="width:100%;">
-              <button class="btn-secondary" style="background: var(--bg-tertiary);">重试</button>
-            </div>
+          <!-- Hint -->
+          <div style="text-align:center; margin-top:16px; padding:16px; background:var(--primary-bg); border-radius:var(--radius-lg);">
+            <div style="font-size:13px; color:var(--primary); font-weight:500;">点击「加入店铺」输入口令，加入你的门店</div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom home indicator -->
-      <div style="height: 1px; background: var(--divider-light);"></div>
-      <div style="display:flex; align-items:center; justify-content:center; padding: 8px 0 20px; background: var(--surface);">
-        <div style="text-align:center; color: var(--text-quaternary);">
-          <svg width="16" height="4" viewBox="0 0 16 4"><rect width="16" height="4" rx="2" fill="currentColor"/></svg>
+      <!-- Step 2: Code Input Page -->
+      <div class="screen-step" id="coach-step-2">
+        <div class="nav-header">
+          <div class="nav-back" onclick="coachGoStep(1)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:64px; height:64px; border-radius:20px; background:var(--primary-gradient); display:flex; align-items:center; justify-content:center; margin-bottom:24px; box-shadow:0 4px 12px rgba(193,95,60,0.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div style="font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">请输入店铺口令</div>
+          <div style="font-size:14px; color:var(--text-secondary); margin-bottom:32px;">向你的店长获取口令</div>
+          <input type="text" class="input-field" placeholder="输入 4 位口令码" maxlength="4" style="margin-bottom:24px;">
+          <button class="btn-primary" onclick="coachGoStep(3)">确认加入</button>
+          <div style="margin-top:16px; font-size:13px; color:var(--text-tertiary);">没有口令？联系你的店长</div>
+        </div>
+      </div>
+
+      <!-- Step 3: Join Success -->
+      <div class="screen-step" id="coach-step-3">
+        <div class="nav-header">
+          <div class="nav-placeholder"></div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--success-bg); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">加入成功</div>
+          <div style="font-size:14px; color:var(--text-secondary); margin-bottom:28px;">你已成功加入「宝龙广场店」</div>
+          <div style="width:100%; background:var(--bg-secondary); border-radius:var(--radius-lg); padding:16px 20px; margin-bottom:32px;">
+            <div class="info-row">
+              <span class="info-label">店铺</span>
+              <span class="info-value">宝龙广场店</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">角色</span>
+              <span class="info-value">普通员工</span>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="coachGoStep(1)">开始使用</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Error - Invalid Code -->
+      <div class="screen-step" id="coach-step-4">
+        <div class="nav-header">
+          <div class="nav-back" onclick="coachGoStep(2)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--danger-bg); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">加入失败</div>
+          <div style="font-size:14px; color:var(--text-secondary); text-align:center; line-height:1.6; margin-bottom:32px;">口令无效或已过期<br/>请检查口令是否正确，或联系店长获取新口令</div>
+          <button class="btn-primary" onclick="coachGoStep(2)">重新输入</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Error - Shop Full -->
+      <div class="screen-step" id="coach-step-5">
+        <div class="nav-header">
+          <div class="nav-back" onclick="coachGoStep(2)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--warning-bg); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">加入失败</div>
+          <div style="font-size:14px; color:var(--text-secondary); text-align:center; line-height:1.6; margin-bottom:32px;">该店铺成员已满<br/>请联系店铺管理员处理</div>
+          <button class="btn-secondary" onclick="coachGoStep(1)" style="background:var(--bg-tertiary);">知道了</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Rebind Confirmation -->
+      <div class="screen-step" id="coach-step-6">
+        <div class="nav-header">
+          <div class="nav-back" onclick="coachGoStep(2)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--warning-bg); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div style="font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom:12px;">换绑确认</div>
+          <div style="font-size:14px; color:var(--text-secondary); text-align:center; line-height:1.7; margin-bottom:8px;">你当前已加入「<strong style="color:var(--text-primary);">飞鸟健身房</strong>」</div>
+          <div style="font-size:14px; color:var(--text-secondary); text-align:center; line-height:1.7; margin-bottom:28px;">加入「<strong style="color:var(--primary);">宝龙广场店</strong>」需要先退出当前店铺。<br/>是否退出并加入？</div>
+          <div style="display:flex; gap:12px; width:100%;">
+            <button class="btn-secondary" onclick="coachGoStep(2)" style="flex:1; margin-top:0;">取消</button>
+            <button class="btn-primary" onclick="coachGoStep(7)" style="flex:1;">退出并加入</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7: Rebind Success -->
+      <div class="screen-step" id="coach-step-7">
+        <div class="nav-header">
+          <div class="nav-placeholder"></div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--success-bg); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">换绑成功</div>
+          <div style="font-size:14px; color:var(--text-secondary); margin-bottom:28px;">你已成功加入「宝龙广场店」</div>
+          <div style="width:100%; background:var(--bg-secondary); border-radius:var(--radius-lg); padding:16px 20px; margin-bottom:32px;">
+            <div class="info-row">
+              <span class="info-label">店铺</span>
+              <span class="info-value">宝龙广场店</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">角色</span>
+              <span class="info-value">普通员工</span>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="coachGoStep(1)">开始使用</button>
+        </div>
+      </div>
+
+      <!-- Step 8: Network Error -->
+      <div class="screen-step" id="coach-step-8">
+        <div class="nav-header">
+          <div class="nav-back" onclick="coachGoStep(2)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="nav-title">加入店铺</span>
+          <div class="nav-placeholder"></div>
+        </div>
+        <div class="screen-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; padding:40px 24px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--danger-bg); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0119 12.55"/><path d="M5 12.55a10.94 10.94 0 015.17-2.39"/><path d="M10.71 5.05A16 16 0 0122.56 9"/><path d="M1.42 9a15.91 15.91 0 014.7-2.88"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">加入失败</div>
+          <div style="font-size:14px; color:var(--text-secondary); text-align:center; line-height:1.6; margin-bottom:32px;">网络异常，请稍后重试</div>
+          <button class="btn-primary" onclick="coachGoStep(2)">重新输入</button>
         </div>
       </div>
     </div>
 
-    <div class="step-indicator">
-      <div class="step-dot active"></div>
+    <!-- Bottom home indicator -->
+    <div style="height:1px; background:var(--divider-light);"></div>
+    <div style="display:flex; align-items:center; justify-content:center; padding:8px 0 20px; background:var(--surface);">
+      <div style="text-align:center; color:var(--text-quaternary);">
+        <svg width="16" height="4" viewBox="0 0 16 4"><rect width="16" height="4" rx="2" fill="currentColor"/></svg>
+      </div>
     </div>
-    <div class="step-label" id="exception-step-label">已有店铺错误提示</div>
   </div>
 
-  <!-- Controls -->
-  <div class="exception-controls">
-    <div class="exception-ctrl-item active" id="ctrl-a" onclick="switchException('a')">
-      <div class="exception-ctrl-dot"></div>
-      <span>已有店铺错误提示</span>
-    </div>
-    <div class="exception-ctrl-item" id="ctrl-b" onclick="switchException('b')">
-      <div class="exception-ctrl-dot"></div>
-      <span>通用错误提示</span>
-    </div>
+  <div class="step-indicator" id="coach-indicator">
+    <div class="step-dot active" data-step="1" onclick="coachGoStep(1)"></div>
+    <div class="step-dot" data-step="2" onclick="coachGoStep(2)"></div>
+    <div class="step-dot" data-step="3" onclick="coachGoStep(3)"></div>
+    <div class="step-dot" data-step="4" onclick="coachGoStep(4)"></div>
+    <div class="step-dot" data-step="5" onclick="coachGoStep(5)"></div>
+    <div class="step-dot" data-step="6" onclick="coachGoStep(6)"></div>
+    <div class="step-dot" data-step="7" onclick="coachGoStep(7)"></div>
+    <div class="step-dot" data-step="8" onclick="coachGoStep(8)"></div>
   </div>
-  </div><!-- /phone-with-controls -->
+  <div class="step-label" id="coach-label">首页金刚位 &middot; 点击「加入店铺」</div>
+</div>
+
 </div>
 </div>
 
@@ -1731,136 +1082,130 @@
 </style>
 
 <script>
-  // No scaling needed — flex centering + horizontal scroll handles layout
+  // Auto-scale
+  function scalePhones() {
+    var c = document.querySelector('.phones-container');
+    var w = document.querySelector('.phones-wrapper');
+    if (!c || !w) return;
+    c.style.transform = 'none';
+    c.style.margin = '0 auto';
+    var nw = c.offsetWidth;
+    var avail = w.clientWidth;
+    if (nw > avail && avail > 0) {
+      var s = avail / nw;
+      c.style.transform = 'scale(' + s + ')';
+      c.style.transformOrigin = 'top center';
+      c.style.margin = '0';
+      c.style.marginLeft = ((avail - nw) / 2) + 'px';
+      w.style.height = (c.offsetHeight * s) + 'px';
+    } else {
+      w.style.height = 'auto';
+    }
+  }
+  window.addEventListener('resize', scalePhones);
+  scalePhones();
+  setTimeout(scalePhones, 100);
+  setTimeout(scalePhones, 500);
 
-  const ownerLabels = ['店铺成员管理 · 点击「添加成员」', '选择添加方式', '手动添加成员'];
-  const coachLabels = ['微信收到邀请链接', '确认加入店铺', '加入成功 & 下载 App'];
+  // Owner labels
+  var ownerLabels = ['成员列表 · 点击「添加成员」', '选择添加方式', '查看邀请口令'];
+  // Coach labels
+  var coachLabels = ['首页金刚位 · 点击「加入店铺」', '输入口令码', '加入成功', '口令无效/已过期', '店铺成员已满', '换绑确认', '换绑成功', '网络异常'];
 
-  // Owner: Step management
+  // Owner step management
   function ownerGoStep(step) {
     hideAllSheets();
-    const indicator = document.getElementById('owner-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === step);
-      dot.classList.toggle('done', s < step);
-    });
-    document.getElementById('owner-step-label').textContent = ownerLabels[step - 1];
+    updateDots('owner-indicator', step);
+    document.getElementById('owner-label').textContent = ownerLabels[step - 1];
   }
 
-  // Owner: Show add method sheet
   function showAddSheet() {
     document.getElementById('addSheet').style.display = 'flex';
-    const indicator = document.getElementById('owner-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === 2);
-      dot.classList.toggle('done', s < 2);
-    });
-    document.getElementById('owner-step-label').textContent = ownerLabels[1];
+    updateDots('owner-indicator', 2);
+    document.getElementById('owner-label').textContent = ownerLabels[1];
   }
 
-  function hideAddSheet(event) {
-    if (event && event.target !== event.currentTarget) return;
+  function hideAddSheet(e) {
+    if (e && e.target !== e.currentTarget) return;
     document.getElementById('addSheet').style.display = 'none';
     ownerGoStep(1);
+  }
+
+  function showCodeSheet() {
+    document.getElementById('addSheet').style.display = 'none';
+    document.getElementById('codeSheet').style.display = 'flex';
+    updateDots('owner-indicator', 3);
+    document.getElementById('owner-label').textContent = ownerLabels[2];
+  }
+
+  function showCodeSheetFromDot() {
+    document.getElementById('addSheet').style.display = 'none';
+    document.getElementById('codeSheet').style.display = 'flex';
+    updateDots('owner-indicator', 3);
+    document.getElementById('owner-label').textContent = ownerLabels[2];
+  }
+
+  function hideCodeSheet(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('codeSheet').style.display = 'none';
+    document.getElementById('addSheet').style.display = 'flex';
+    updateDots('owner-indicator', 2);
+    document.getElementById('owner-label').textContent = ownerLabels[1];
+  }
+
+  function hideAddSheetDirect() {
+    document.getElementById('codeSheet').style.display = 'none';
+    document.getElementById('addSheet').style.display = 'flex';
+    updateDots('owner-indicator', 2);
+    document.getElementById('owner-label').textContent = ownerLabels[1];
   }
 
   function hideAllSheets() {
     document.getElementById('addSheet').style.display = 'none';
-    document.getElementById('manualAddSheet').style.display = 'none';
+    document.getElementById('codeSheet').style.display = 'none';
     ownerGoStep(1);
   }
 
-  // Owner: Manual add sheet
-  function showManualAddSheet() {
-    document.getElementById('addSheet').style.display = 'none';
-    document.getElementById('manualAddSheet').style.display = 'flex';
-    // Reset form
-    document.getElementById('phoneInput').value = '';
-    selectRole('normal');
-    document.getElementById('owner-step-label').textContent = ownerLabels[2];
-  }
-
-  function hideManualAddSheet(event) {
-    if (event && event.target !== event.currentTarget) return;
-    document.getElementById('manualAddSheet').style.display = 'none';
-    document.getElementById('addSheet').style.display = 'flex';
-  }
-
-  function selectRole(role) {
-    document.getElementById('roleNormal').classList.toggle('active', role === 'normal');
-    document.getElementById('roleAdmin').classList.toggle('active', role === 'admin');
-  }
-
-  function confirmManualAdd() {
-    const phone = document.getElementById('phoneInput').value.trim();
-    if (!phone) {
-      showToast('请输入手机号');
-      return;
-    }
-    const role = document.getElementById('roleAdmin').classList.contains('active') ? '管理员' : '普通员工';
-    document.getElementById('manualAddSheet').style.display = 'none';
-    ownerGoStep(1);
-    showToast('已添加 ' + phone + ' 为' + role);
-  }
-
-  // Owner: Toast
+  // Toast
   function showToast(text) {
-    const toast = document.getElementById('ownerToast');
-    const toastText = document.getElementById('toastText');
-    toastText.textContent = text;
+    var toast = document.getElementById('ownerToast');
+    var t = document.getElementById('toastText');
+    t.textContent = text;
     toast.style.display = 'block';
     toast.classList.remove('hide');
-    // Restart animation
     toast.style.animation = 'none';
     toast.offsetHeight;
     toast.style.animation = 'toastIn 0.3s ease forwards';
-    setTimeout(() => {
+    setTimeout(function() {
       toast.classList.add('hide');
-      setTimeout(() => {
+      setTimeout(function() {
         toast.style.display = 'none';
         toast.classList.remove('hide');
       }, 300);
     }, 1500);
   }
 
-  // Coach: Step management
+  // Coach step management
   function coachGoStep(step) {
-    document.querySelectorAll('#coach-screen .screen-step').forEach(el => el.style.display = 'none');
-    document.getElementById('coach-step-' + step).style.display = 'block';
-
-    const indicator = document.getElementById('coach-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === step);
-      dot.classList.toggle('done', s < step);
+    document.querySelectorAll('#coach-screen .screen-step').forEach(function(el) {
+      el.classList.remove('active');
     });
-    document.getElementById('coach-step-label').textContent = coachLabels[step - 1];
+    document.getElementById('coach-step-' + step).classList.add('active');
+    updateDots('coach-indicator', step);
+    document.getElementById('coach-label').textContent = coachLabels[step - 1];
   }
 
-  // Coach: Join confirmation
-  function showJoinConfirm() {
-    document.getElementById('joinConfirmModal').style.display = 'flex';
-  }
-  function hideJoinConfirm(event) {
-    if (event && event.target !== event.currentTarget) return;
-    document.getElementById('joinConfirmModal').style.display = 'none';
-  }
-  function hideJoinConfirmDirect() {
-    document.getElementById('joinConfirmModal').style.display = 'none';
-  }
-
-  // Exception: switch variants
-  const exceptionLabels = { a: '已有店铺错误提示', b: '通用错误提示' };
-  function switchException(variant) {
-    document.getElementById('exception-step-a').style.display = variant === 'a' ? 'block' : 'none';
-    document.getElementById('exception-step-b').style.display = variant === 'b' ? 'block' : 'none';
-    document.getElementById('ctrl-a').classList.toggle('active', variant === 'a');
-    document.getElementById('ctrl-b').classList.toggle('active', variant === 'b');
-    document.getElementById('exception-step-label').textContent = exceptionLabels[variant];
+  // Update step dots
+  function updateDots(containerId, activeStep) {
+    var dots = document.getElementById(containerId).querySelectorAll('.step-dot');
+    dots.forEach(function(dot) {
+      var s = parseInt(dot.dataset.step);
+      dot.classList.toggle('active', s === activeStep);
+      dot.classList.toggle('done', s < activeStep);
+    });
   }
 </script>
 
 </body>
 </html>
+<parameter=file_path>/Users/huangxiaohao/Library/Application Support/Claude-3p/local-agent-mode-sessions/90a6585e-33f6-47a4-a114-bf050dd41d5e/00000000-0000-4000-8000-000000000001/local_27b971fe-8c47-418e-a5de-5c39a84a278a/outputs/invite-code-prototype.html
