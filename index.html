@@ -1307,27 +1307,6 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
             </div>
             <div class="sheet-divider"></div>
-            <div class="sheet-option" onclick="showShareSheet()">
-              <div class="sheet-option-icon" style="background: var(--primary-bg);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-              </div>
-              <div class="sheet-option-text">
-                <div class="sheet-option-title">复制链接分享</div>
-                <div class="sheet-option-desc">生成邀请链接，成员接受邀请加入</div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            </div>
-            <div class="sheet-cancel">
-              <span class="sheet-cancel-btn" onclick="hideAllSheets()">取消</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Sheet 2: Share Method -->
-        <div class="bottom-sheet-overlay" id="shareSheet" style="display:none;" onclick="hideShareSheet(event)">
-          <div class="bottom-sheet" onclick="event.stopPropagation()">
-            <div class="sheet-handle"></div>
-            <div class="sheet-title">分享邀请链接</div>
             <div class="sheet-option" onclick="hideAllSheets(); showToast('已调起微信分享')">
               <div class="sheet-option-icon" style="background: #07C160;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05a6.093 6.093 0 01-.247-1.732c0-3.614 3.232-6.564 7.219-6.564.258 0 .51.013.761.036C16.407 4.658 12.898 2.188 8.691 2.188zm-2.5 4.262a1.125 1.125 0 110 2.25 1.125 1.125 0 010-2.25zm5.048 0a1.125 1.125 0 110 2.25 1.125 1.125 0 010-2.25zM15.881 9.63c-3.544 0-6.42 2.554-6.42 5.7 0 3.147 2.876 5.7 6.42 5.7.724 0 1.424-.1 2.08-.287a.678.678 0 01.561.077l1.492.874a.255.255 0 00.131.042.229.229 0 00.228-.23c0-.056-.023-.11-.038-.167l-.306-1.161a.46.46 0 01.166-.52C21.618 18.7 22.5 17.096 22.5 15.33c0-3.146-2.876-5.7-6.619-5.7zm-2.586 3.72a.88.88 0 110 1.76.88.88 0 010-1.76zm5.172 0a.88.88 0 110 1.76.88.88 0 010-1.76z"/></svg>
@@ -1350,7 +1329,7 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-quaternary)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
             </div>
             <div class="sheet-cancel">
-              <span class="sheet-cancel-btn" onclick="hideAddSheetDirect()">返回</span>
+              <span class="sheet-cancel-btn" onclick="hideAllSheets()">取消</span>
             </div>
           </div>
         </div>
@@ -1423,7 +1402,6 @@
     <div class="step-indicator" id="owner-steps-indicator">
       <div class="step-dot active" data-step="1" onclick="ownerGoStep(1)"></div>
       <div class="step-dot" data-step="2" onclick="showAddSheet()"></div>
-      <div class="step-dot" data-step="3" onclick="showShareSheetFromDot()"></div>
     </div>
     <div class="step-label" id="owner-step-label">教练列表 &middot; 点击「添加成员」</div>
   </div>
@@ -1755,7 +1733,7 @@
 <script>
   // No scaling needed — flex centering + horizontal scroll handles layout
 
-  const ownerLabels = ['店铺成员管理 · 点击「添加成员」', '选择添加方式', '分享邀请链接', '手动添加成员'];
+  const ownerLabels = ['店铺成员管理 · 点击「添加成员」', '选择添加方式', '手动添加成员'];
   const coachLabels = ['微信收到邀请链接', '确认加入店铺', '加入成功 & 下载 App'];
 
   // Owner: Step management
@@ -1788,59 +1766,8 @@
     ownerGoStep(1);
   }
 
-  function hideAddSheetDirect() {
-    document.getElementById('shareSheet').style.display = 'none';
-    document.getElementById('addSheet').style.display = 'flex';
-    const indicator = document.getElementById('owner-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === 2);
-      dot.classList.toggle('done', s < 2);
-    });
-    document.getElementById('owner-step-label').textContent = ownerLabels[1];
-  }
-
-  // Owner: Show share method sheet
-  function showShareSheet() {
-    document.getElementById('addSheet').style.display = 'none';
-    document.getElementById('shareSheet').style.display = 'flex';
-    const indicator = document.getElementById('owner-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === 3);
-      dot.classList.toggle('done', s < 3);
-    });
-    document.getElementById('owner-step-label').textContent = ownerLabels[2];
-  }
-
-  function showShareSheetFromDot() {
-    document.getElementById('addSheet').style.display = 'none';
-    document.getElementById('shareSheet').style.display = 'flex';
-    const indicator = document.getElementById('owner-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === 3);
-      dot.classList.toggle('done', s < 3);
-    });
-    document.getElementById('owner-step-label').textContent = ownerLabels[2];
-  }
-
-  function hideShareSheet(event) {
-    if (event && event.target !== event.currentTarget) return;
-    document.getElementById('shareSheet').style.display = 'none';
-    document.getElementById('addSheet').style.display = 'flex';
-    const indicator = document.getElementById('owner-steps-indicator');
-    indicator.querySelectorAll('.step-dot').forEach(dot => {
-      const s = parseInt(dot.dataset.step);
-      dot.classList.toggle('active', s === 2);
-      dot.classList.toggle('done', s < 2);
-    });
-    document.getElementById('owner-step-label').textContent = ownerLabels[1];
-  }
-
   function hideAllSheets() {
     document.getElementById('addSheet').style.display = 'none';
-    document.getElementById('shareSheet').style.display = 'none';
     document.getElementById('manualAddSheet').style.display = 'none';
     ownerGoStep(1);
   }
@@ -1852,7 +1779,7 @@
     // Reset form
     document.getElementById('phoneInput').value = '';
     selectRole('normal');
-    document.getElementById('owner-step-label').textContent = ownerLabels[3];
+    document.getElementById('owner-step-label').textContent = ownerLabels[2];
   }
 
   function hideManualAddSheet(event) {
